@@ -2,9 +2,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-TOP_N = 10  # Default number of top competitors to plot
+# TOP_N = 10  # Default number of top competitors to plot
 
-def plot_championship_progression(races_list, standings_data, title, year, top_n=TOP_N,
+def plot_championship_progression(races_list, standings_data, title, year, top_n,
                                 figsize=(15, 8), rotation=45, colors=None):
     if not standings_data:
         print(f"No standings data available to plot.")

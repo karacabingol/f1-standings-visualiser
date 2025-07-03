@@ -1,4 +1,5 @@
 argparse
+datetime
 fastf1
 matplotlib
 numpy

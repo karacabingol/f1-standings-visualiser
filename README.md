@@ -18,7 +18,7 @@ The package consists of several .py files.
 - **visualiser.py**: plots the championship points progression over the course of the season for the top drivers and teams using matplotlib, highlighting title battles as they develop.
 - **main.py**: generates line charts and saves them as PNG files in your working directory, named with the relevant year for easy reference.
 
-The project has the dependencies [argparse](https://docs.python.org/3/library/argparse.html), [fastf1](https://docs.fastf1.dev/), [matplotlib](https://matplotlib.org/), [numpy](https://numpy.org/), [pandas](https://pandas.pydata.org/), and [plotly](https://plotly.com/python/) (optional).
+The project has the dependencies [argparse](https://docs.python.org/3/library/argparse.html), [datetime](https://docs.python.org/3/library/datetime.html), [fastf1](https://docs.fastf1.dev/), [matplotlib](https://matplotlib.org/), [numpy](https://numpy.org/), [pandas](https://pandas.pydata.org/), and [plotly](https://plotly.com/python/) (optional).
 
 ## Features
 
@@ -31,8 +31,8 @@ The project has the dependencies [argparse](https://docs.python.org/3/library/ar
 ## Installation
 
 ```
-git clone <your-repo-url>
-cd f1_standings_visualiser
+git clone https://github.com/karacabingol/f1-standings-visualiser
+cd f1-standings-visualiser
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
@@ -43,16 +43,21 @@ pip install -r requirements.txt
 To use the application, run the script as follows:
 
 ```
-python main.py -y [1950 - present]
+python main.py -y YEAR [-n TOP_N]
 ```
 
 **Arguments**
     - "-y" / "--year": **(Required)** Year, i.e. the Formula 1 season
+    - "-n" / "--top_n": Number of top competitors to plot in the graphs (default: 10)
 
 ***e.g.*** 
 
 ```
+# without optional arguments
 python main.py -y 2008
+
+#with optional arguments
+python main.py -y 2008 -n 6
 ```
 
 Note: The constructors' championship began to be awarded starting from the 1958 season. Any season between 1950 and 1957 will create one PNG file, showing the drivers' championship progression.

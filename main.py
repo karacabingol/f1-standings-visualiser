@@ -1,11 +1,12 @@
 import argparse
+import datetime
 import matplotlib.pyplot as plt
 from f1_season_standings.fetcher import fetch_season_data
 from f1_season_standings.points_systems import get_count_best_n, get_team_count_best_n
 from f1_season_standings.standings import create_cumulative_standings_drivers, create_cumulative_standings_teams
 from f1_season_standings.visualiser import plot_championship_progression
 
-def generate_season_charts(year: int) -> None:
+def generate_season_charts(year, top_n) -> None:
     print(f">>>> main.py has started <<<<")
     print(f"Generating charts for {year} season...")
 
@@ -45,7 +46,7 @@ def generate_season_charts(year: int) -> None:
 
     # Plot and save driver championship
     plot_championship_progression(races_list, driver_standings,
-                                  "F1 Driver Championship Progression", year)
+                                  "F1 Driver Championship Progression", year, top_n=top_n)
     plt.savefig(f"{year}_driver_championship.png", bbox_inches="tight", dpi=300)
     plt.close()
     print("Driver championship chart saved")
@@ -53,7 +54,7 @@ def generate_season_charts(year: int) -> None:
     # Plot and save constructor championship
     if constructors_valid and team_standings:
         plot_championship_progression(races_list, team_standings,
-                                    "F1 Constructor Championship Progression", year)
+                                    "F1 Constructor Championship Progression", year, top_n=top_n)
         plt.savefig(f"{year}_constructor_championship.png", bbox_inches="tight", dpi=300)
         plt.close()
         print("Constructor championship chart saved")
@@ -67,12 +68,14 @@ def generate_season_charts(year: int) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Visualise Formula 1 driver or constructor standings for a season")
     parser.add_argument("-y", "--year", type=int, required=True, help="Enter a year to visualise, e.g. 1950")
+    parser.add_argument("-n", "--top_n", type=int, default=10, help="Number of top competitors to plot (default: 10)")
 
     args = parser.parse_args()
     year = args.year
+    top_n = args.top_n
 
     try:
-        generate_season_charts(year)
+        generate_season_charts(year, top_n)
     except Exception as e:
         print(f"An unexpected error has occurred: {e}")
 

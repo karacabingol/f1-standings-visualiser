@@ -1,0 +1,6 @@
+argparse
+fastf1
+matplotlib
+numpy
+pandas
+plotly
